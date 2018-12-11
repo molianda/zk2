@@ -1,37 +1,73 @@
-*{
-	padding:0;
-	margin:0;
-	list-style: none;
-}
-.mui-bar-nav{
-	line-height: 45px;
-}
-.mui-bar-nav span{
-	display: inline-block;
-	margin-right:10px;
-}
-.mui-bar-nav span.active{
-	color:red;
-}
-.mui-scroll-wrapper{
-	margin-top:50px;
-}
-.mui-scroll dl{
-	width:45%;
-	height:300px;
-	float:left;
-	margin-left:15px;
-	margin-top:10px;
-}
-.mui-scroll dl dd{
-	width:100%;
-	height:230px;
-}
-.mui-scroll dl dd img{
-	width:100%;
-	height:100%;
-}
-.mui-scroll dl dt .num span{
-	display: inline-block;
-	margin-left:20px;
-}
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; }
+  .wrapper header {
+    width: 100%;
+    height: 44px;
+    background: #f6f6f6; }
+    .wrapper header .nav-list {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 44px;
+      display: flex; }
+      .wrapper header .nav-list li {
+        height: 100%;
+        padding: 0 10px; }
+        .wrapper header .nav-list li.active {
+          color: red;
+          border-bottom: 2px solid red; }
+  .wrapper section {
+    margin-top: 10px;
+    width: 100%;
+    flex: 1;
+    overflow: hidden; }
+    .wrapper section .con-list {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap; }
+      .wrapper section .con-list:before {
+        content: attr(up);
+        width: 100%;
+        height: 44px;
+        background: #c6c6c6;
+        text-align: center;
+        line-height: 44px;
+        position: absolute;
+        bottom: -44px;
+        left: 0; }
+      .wrapper section .con-list dl {
+        width: 46%;
+        margin: 2%; }
+        .wrapper section .con-list dl dt {
+          width: 100%; }
+          .wrapper section .con-list dl dt img {
+            width: 100%; }
+        .wrapper section .con-list dl dd {
+          display: flex;
+          flex-direction: column; }
+          .wrapper section .con-list dl dd p {
+            margin-bottom: 5px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between; }
+            .wrapper section .con-list dl dd p span {
+              color: #666; }
+  .wrapper footer {
+    width: 100%;
+    height: 50px;
+    background: #f6f6f6; }

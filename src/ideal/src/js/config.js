@@ -1,6 +1,7 @@
 require.config({
-	baseUrl:'/js/',
-	paths:{
-		'mui':'./libs/mui.min'
-	}
+    baseUrl: '/js/',
+    paths: {
+        'bscroll': './libs/better-scroll',
+        '$': './common/ajax'
+    }
 })

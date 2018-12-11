@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-	<link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
-	<header class="mui-bar mui-bar-nav">
-		<span class="mine active">我的爱豆</span>
-		<span class="all">所有爱豆</span>
-		<span class="big">饭圈大咖</span>
-	</header>
-	<div class="mui-scroll-wrapper">
-		<div class="mui-scroll">
-			<!-- <dl>
-				<dd><img src="./1.jpg" alt=""></dd>
-				<dt>
-					<p class="title">听课文化渴望和高科技和反馈给京东方</p>
-					<p class="num"><span class="name">赵丽颖</span><span class="people">235w</span></p>
-				</dt>
-			</dl>
-			<dl>
-				<dd><img src="./1.jpg" alt=""></dd>
-				<dt>
-					<p class="title">听课文化渴望和高科技和反馈给京东方</p>
-					<p class="num"><span class="name">赵丽颖</span><span class="people">235w</span></p>
-				</dt>
-			</dl> -->
-		</div>
-	</div>
-	<script src="./js/libs/require.js" data-main="./js/page/index"></script>
+    <div class="wrapper">
+        <header>
+            <ul class="nav-list">
+                <li class="active" data-id="1">我的爱豆</li>
+                <li data-id="2">所有爱豆</li>
+                <li data-id="3">饭圈大咖</li>
+            </ul>
+        </header>
+        <section class="con">
+            <div class="con-list" up="上拉加载">
+                <!-- <dl>
+                    <dt><img src="./1.jpg" alt=""></dt>
+                    <dd>
+                        <p class="title">或改扩建施工科技的符合规范健康韩国咖啡机</p>
+                        <p class="num">
+                            <span class="name">赵丽颖</span>
+                            <span class="people">23w</span>
+                        </p>
+                    </dd>
+                </dl> -->
+            </div>
+        </section>
+        <footer>footer</footer>
+    </div>
+    <script src="./js/libs/require.js" data-main="./js/page/index"></script>
 </body>
+
 </html>

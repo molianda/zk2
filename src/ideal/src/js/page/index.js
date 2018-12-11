@@ -1,32 +1,87 @@
-require(['./js/config.js'],function(){
-	require(['mui'],function(mui){
-		var pagenum=0,
-			page_size=6,
-			type=1,
-			total;
-		mui.init({
-				pullRefresh: {
-					container: '#pullrefresh',
-					up: {
-						auto:true,
-						contentrefresh: '正在加载...',
-						callback: pullupRefresh
-					}
-				}
-			});
-		function pullupRefresh() {
-			setTimeout(function() {
-				pagenum++;
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh(pagenum==page_size); //参数为true代表没有更多数据了。
-				mui.ajax('/users',{
-					success:function(res){
-						console.log(res)
-					}
-				})
-			}, 1000);
-		}
-		mui('.mui-scroll-wrapper').scroll({
-			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-		});
-	})
+require(['./js/config.js'], function() {
+    require(['bscroll', '$'], function(bscroll, $) {
+        var scroll = new bscroll('.con', {
+            probeType: 2,
+            click: true
+        });
+        var conlist = document.querySelector('.con-list');
+        scroll.on('scroll', function() {
+            if (this.y < this.maxScrollY - 44) {
+                if (page < total) {
+                    conlist.setAttribute('up', '释放加载更多');
+                } else {
+                    conlist.setAttribute('up', '没有更多数据');
+                }
+            } else if (this.y < this.maxScrollY - 22) {
+                if (page < total) {
+                    conlist.setAttribute('up', '上拉加载');
+                } else {
+                    conlist.setAttribute('up', '没有更多数据');
+                }
+            }
+        });
+        scroll.on('touchEnd', function() {
+            if (conlist.getAttribute('up') === '释放加载更多') {
+                if (page < total) {
+                    page++;
+                    getlist();
+                    conlist.setAttribute('up', '上拉加载');
+                } else {
+                    conlist.setAttribute('up', '没有更多数据');
+                }
+            }
+        })
+        var type = 1,
+            page = 1,
+            page_size = 6;
+
+        getlist();
+        //请求数据
+        function getlist() {
+            $.ajax({
+                url: '/api/get/list',
+                dataType: 'json',
+                data: {
+                    type: type,
+                    page_size: page_size,
+                    page: page
+                },
+                success: function(res) {
+                    if (res.code === 1) {
+                        renderlist(res.data);
+                        scroll.refresh();
+                        total = res.total;
+                    }
+                }
+            });
+        }
+
+        //渲染数据
+        function renderlist(data) {
+            var html = '';
+            var baseurl = 'http://localhost:3000/images';
+            data.forEach(function(ele) {
+                html += `<dl>
+							<dt><img src="${baseurl}/${ele.img}" alt=""></dt>
+							<dd>
+								<p class="title">${ele.title}</p>
+								<p class="num"><span class="name">${ele.name}</span><span class="people">${ele.people}w</span></p>
+							</dd>
+						</dl>`;
+            });
+            conlist.innerHTML += html;
+        }
+        var navlist = document.querySelector('.nav-list');
+        var lists = document.querySelectorAll('.nav-list li');
+        navlist.addEventListener('click', function(e) {
+            lists.forEach(function(ele) {
+                ele.classList.remove('active');
+            })
+            e.target.classList.add('active');
+            type = e.target.getAttribute('data-id');
+            page = 1;
+            conlist.innerHTML = '';
+            getlist();
+        })
+    })
 })
